@@ -10,33 +10,60 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FindingsRouteImport } from './routes/findings'
+import { Route as FindingsIndexRouteImport } from './routes/findings.index'
+import { Route as FindingsIdRouteImport } from './routes/findings.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FindingsRoute = FindingsRouteImport.update({
+  id: '/findings',
+  path: '/findings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FindingsIndexRoute = FindingsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => FindingsRoute,
+} as any)
+const FindingsIdRoute = FindingsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => FindingsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/findings': typeof FindingsRouteWithChildren
+  '/findings/$id': typeof FindingsIdRoute
+  '/findings/': typeof FindingsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/findings/$id': typeof FindingsIdRoute
+  '/findings': typeof FindingsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/findings': typeof FindingsRouteWithChildren
+  '/findings/$id': typeof FindingsIdRoute
+  '/findings/': typeof FindingsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/findings' | '/findings/$id' | '/findings/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/findings/$id' | '/findings'
+  id: '__root__' | '/' | '/findings' | '/findings/$id' | '/findings/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FindingsRoute: typeof FindingsRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +75,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/findings': {
+      id: '/findings'
+      path: '/findings'
+      fullPath: '/findings'
+      preLoaderRoute: typeof FindingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/findings/': {
+      id: '/findings/'
+      path: '/'
+      fullPath: '/findings/'
+      preLoaderRoute: typeof FindingsIndexRouteImport
+      parentRoute: typeof FindingsRoute
+    }
+    '/findings/$id': {
+      id: '/findings/$id'
+      path: '/$id'
+      fullPath: '/findings/$id'
+      preLoaderRoute: typeof FindingsIdRouteImport
+      parentRoute: typeof FindingsRoute
+    }
   }
 }
 
+interface FindingsRouteChildren {
+  FindingsIdRoute: typeof FindingsIdRoute
+  FindingsIndexRoute: typeof FindingsIndexRoute
+}
+
+const FindingsRouteChildren: FindingsRouteChildren = {
+  FindingsIdRoute: FindingsIdRoute,
+  FindingsIndexRoute: FindingsIndexRoute,
+}
+
+const FindingsRouteWithChildren = FindingsRoute._addFileChildren(
+  FindingsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FindingsRoute: FindingsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
