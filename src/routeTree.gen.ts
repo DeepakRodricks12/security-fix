@@ -10,33 +10,137 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AgentTasksRouteImport } from './routes/agent-tasks'
+import { Route as FindingsRouteImport } from './routes/findings'
+import { Route as ReportRouteImport } from './routes/report'
+import { Route as RepositoryRouteImport } from './routes/repository'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as TestsRouteImport } from './routes/tests'
+import { Route as FindingsIndexRouteImport } from './routes/findings.index'
+import { Route as FindingsIdRouteImport } from './routes/findings.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AgentTasksRoute = AgentTasksRouteImport.update({
+  id: '/agent-tasks',
+  path: '/agent-tasks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FindingsRoute = FindingsRouteImport.update({
+  id: '/findings',
+  path: '/findings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportRoute = ReportRouteImport.update({
+  id: '/report',
+  path: '/report',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RepositoryRoute = RepositoryRouteImport.update({
+  id: '/repository',
+  path: '/repository',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TestsRoute = TestsRouteImport.update({
+  id: '/tests',
+  path: '/tests',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FindingsIndexRoute = FindingsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => FindingsRoute,
+} as any)
+const FindingsIdRoute = FindingsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => FindingsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agent-tasks': typeof AgentTasksRoute
+  '/findings': typeof FindingsRouteWithChildren
+  '/report': typeof ReportRoute
+  '/repository': typeof RepositoryRoute
+  '/settings': typeof SettingsRoute
+  '/tests': typeof TestsRoute
+  '/findings/$id': typeof FindingsIdRoute
+  '/findings/': typeof FindingsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agent-tasks': typeof AgentTasksRoute
+  '/report': typeof ReportRoute
+  '/repository': typeof RepositoryRoute
+  '/settings': typeof SettingsRoute
+  '/tests': typeof TestsRoute
+  '/findings/$id': typeof FindingsIdRoute
+  '/findings': typeof FindingsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/agent-tasks': typeof AgentTasksRoute
+  '/findings': typeof FindingsRouteWithChildren
+  '/report': typeof ReportRoute
+  '/repository': typeof RepositoryRoute
+  '/settings': typeof SettingsRoute
+  '/tests': typeof TestsRoute
+  '/findings/$id': typeof FindingsIdRoute
+  '/findings/': typeof FindingsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/agent-tasks'
+    | '/findings'
+    | '/report'
+    | '/repository'
+    | '/settings'
+    | '/tests'
+    | '/findings/$id'
+    | '/findings/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/agent-tasks'
+    | '/report'
+    | '/repository'
+    | '/settings'
+    | '/tests'
+    | '/findings/$id'
+    | '/findings'
+  id:
+    | '__root__'
+    | '/'
+    | '/agent-tasks'
+    | '/findings'
+    | '/report'
+    | '/repository'
+    | '/settings'
+    | '/tests'
+    | '/findings/$id'
+    | '/findings/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AgentTasksRoute: typeof AgentTasksRoute
+  FindingsRoute: typeof FindingsRouteWithChildren
+  ReportRoute: typeof ReportRoute
+  RepositoryRoute: typeof RepositoryRoute
+  SettingsRoute: typeof SettingsRoute
+  TestsRoute: typeof TestsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +152,87 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/agent-tasks': {
+      id: '/agent-tasks'
+      path: '/agent-tasks'
+      fullPath: '/agent-tasks'
+      preLoaderRoute: typeof AgentTasksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/findings': {
+      id: '/findings'
+      path: '/findings'
+      fullPath: '/findings'
+      preLoaderRoute: typeof FindingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/report': {
+      id: '/report'
+      path: '/report'
+      fullPath: '/report'
+      preLoaderRoute: typeof ReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/repository': {
+      id: '/repository'
+      path: '/repository'
+      fullPath: '/repository'
+      preLoaderRoute: typeof RepositoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tests': {
+      id: '/tests'
+      path: '/tests'
+      fullPath: '/tests'
+      preLoaderRoute: typeof TestsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/findings/': {
+      id: '/findings/'
+      path: '/'
+      fullPath: '/findings/'
+      preLoaderRoute: typeof FindingsIndexRouteImport
+      parentRoute: typeof FindingsRoute
+    }
+    '/findings/$id': {
+      id: '/findings/$id'
+      path: '/$id'
+      fullPath: '/findings/$id'
+      preLoaderRoute: typeof FindingsIdRouteImport
+      parentRoute: typeof FindingsRoute
+    }
   }
 }
 
+interface FindingsRouteChildren {
+  FindingsIdRoute: typeof FindingsIdRoute
+  FindingsIndexRoute: typeof FindingsIndexRoute
+}
+
+const FindingsRouteChildren: FindingsRouteChildren = {
+  FindingsIdRoute: FindingsIdRoute,
+  FindingsIndexRoute: FindingsIndexRoute,
+}
+
+const FindingsRouteWithChildren = FindingsRoute._addFileChildren(
+  FindingsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AgentTasksRoute: AgentTasksRoute,
+  FindingsRoute: FindingsRouteWithChildren,
+  ReportRoute: ReportRoute,
+  RepositoryRoute: RepositoryRoute,
+  SettingsRoute: SettingsRoute,
+  TestsRoute: TestsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
