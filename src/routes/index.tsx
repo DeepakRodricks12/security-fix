@@ -44,11 +44,19 @@ function Overview() {
 
   return (
     <Shell>
-      <div className="mb-8">
-        <p className="label-xs">Breach Guardians SecurityFix</p>
-        <h1 className="mt-2 font-pixel text-base leading-relaxed text-primary glow-text sm:text-xl">
-          FIND IT. FIX IT. PROVE IT.
-        </h1>
+      <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p className="label-xs">Breach Guardians SecurityFix</p>
+          <h1 className="mt-2 font-pixel text-base leading-relaxed text-primary glow-text sm:text-xl">
+            FIND IT. FIX IT. PROVE IT.
+          </h1>
+        </div>
+        <Link
+          to="/presentation"
+          className="border border-primary px-3 py-2 font-mono text-xs text-primary hover:bg-primary hover:text-primary-foreground"
+        >
+          [ VIEW PRESENTATION ]
+        </Link>
       </div>
 
       <div className="grid gap-4 lg:grid-cols-3">
