@@ -311,8 +311,8 @@ function Presentation() {
       </div>
 
       <main className="relative z-10 flex-1 overflow-hidden px-6 py-6 sm:px-12 lg:px-20">
-        <div key={slides[i].key} className="mx-auto h-full max-w-6xl animate-in fade-in slide-in-from-right-4 duration-300">
-          {slides[i].render()}
+        <div key={slides[i]!.key} className="mx-auto h-full max-w-6xl animate-in fade-in slide-in-from-right-4 duration-300">
+          {slides[i]!.render()}
         </div>
       </main>
 
