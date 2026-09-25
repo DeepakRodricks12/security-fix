@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AgentTasksRouteImport } from './routes/agent-tasks'
 import { Route as FindingsRouteImport } from './routes/findings'
+import { Route as PresentationRouteImport } from './routes/presentation'
 import { Route as ReportRouteImport } from './routes/report'
 import { Route as RepositoryRouteImport } from './routes/repository'
 import { Route as SettingsRouteImport } from './routes/settings'
@@ -32,6 +33,11 @@ const AgentTasksRoute = AgentTasksRouteImport.update({
 const FindingsRoute = FindingsRouteImport.update({
   id: '/findings',
   path: '/findings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PresentationRoute = PresentationRouteImport.update({
+  id: '/presentation',
+  path: '/presentation',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReportRoute = ReportRouteImport.update({
@@ -69,6 +75,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agent-tasks': typeof AgentTasksRoute
   '/findings': typeof FindingsRouteWithChildren
+  '/presentation': typeof PresentationRoute
   '/report': typeof ReportRoute
   '/repository': typeof RepositoryRoute
   '/settings': typeof SettingsRoute
@@ -79,6 +86,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agent-tasks': typeof AgentTasksRoute
+  '/presentation': typeof PresentationRoute
   '/report': typeof ReportRoute
   '/repository': typeof RepositoryRoute
   '/settings': typeof SettingsRoute
@@ -91,6 +99,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/agent-tasks': typeof AgentTasksRoute
   '/findings': typeof FindingsRouteWithChildren
+  '/presentation': typeof PresentationRoute
   '/report': typeof ReportRoute
   '/repository': typeof RepositoryRoute
   '/settings': typeof SettingsRoute
@@ -104,6 +113,7 @@ export interface FileRouteTypes {
     | '/'
     | '/agent-tasks'
     | '/findings'
+    | '/presentation'
     | '/report'
     | '/repository'
     | '/settings'
@@ -114,6 +124,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/agent-tasks'
+    | '/presentation'
     | '/report'
     | '/repository'
     | '/settings'
@@ -125,6 +136,7 @@ export interface FileRouteTypes {
     | '/'
     | '/agent-tasks'
     | '/findings'
+    | '/presentation'
     | '/report'
     | '/repository'
     | '/settings'
@@ -137,6 +149,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgentTasksRoute: typeof AgentTasksRoute
   FindingsRoute: typeof FindingsRouteWithChildren
+  PresentationRoute: typeof PresentationRoute
   ReportRoute: typeof ReportRoute
   RepositoryRoute: typeof RepositoryRoute
   SettingsRoute: typeof SettingsRoute
@@ -164,6 +177,13 @@ declare module '@tanstack/react-router' {
       path: '/findings'
       fullPath: '/findings'
       preLoaderRoute: typeof FindingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/presentation': {
+      id: '/presentation'
+      path: '/presentation'
+      fullPath: '/presentation'
+      preLoaderRoute: typeof PresentationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/report': {
@@ -229,6 +249,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgentTasksRoute: AgentTasksRoute,
   FindingsRoute: FindingsRouteWithChildren,
+  PresentationRoute: PresentationRoute,
   ReportRoute: ReportRoute,
   RepositoryRoute: RepositoryRoute,
   SettingsRoute: SettingsRoute,
