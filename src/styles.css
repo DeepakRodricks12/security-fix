@@ -143,3 +143,27 @@
 @utility caret {
   animation: blink 1.1s steps(1) infinite;
 }
+
+/* ---- Presentation animation language ---- */
+@keyframes bg-reveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes bg-slide { from { opacity: 0; transform: translateX(-16px); } to { opacity: 1; transform: none; } }
+@keyframes bg-scan { from { left: -10%; } to { left: 110%; } }
+@keyframes bg-scan-y { from { top: 0; } to { top: 100%; } }
+@keyframes bg-pulse { 0%,100% { box-shadow: 0 0 0 0 oklch(0.87 0.26 143 / 0%); } 50% { box-shadow: 0 0 28px 2px oklch(0.87 0.26 143 / 45%); } }
+@keyframes bg-glow-in { from { opacity: 0; filter: drop-shadow(0 0 0 transparent) blur(4px); } to { opacity: 1; filter: drop-shadow(0 0 18px oklch(0.87 0.26 143 / 45%)); } }
+@keyframes bg-strike { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes bg-dash { to { stroke-dashoffset: -20; } }
+@keyframes bg-flow { from { background-position: 0 0; } to { background-position: 0 40px; } }
+@keyframes bg-fade-out { to { opacity: 0.15; filter: blur(1px); } }
+@keyframes bg-glitch { 0%,92%,100% { transform: none; } 94% { transform: translateX(2px); } 96% { transform: translateX(-2px); } }
+@keyframes bg-up { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+.bg-r { opacity: 0; animation: bg-reveal 0.5s ease-out forwards; }
+.bg-s { opacity: 0; animation: bg-slide 0.5s ease-out forwards; }
+.bg-logo-in { opacity: 0; animation: bg-glow-in 1.2s ease-out forwards; }
+.bg-pulse { animation: bg-pulse 2.4s ease-in-out infinite; }
+.bg-glitch { animation: bg-glitch 4s steps(1) infinite; }
+.bg-strike { position: relative; }
+.bg-strike::after { content: ""; position: absolute; left: -4px; right: -4px; top: 50%; height: 2px; background: var(--critical); transform-origin: left; transform: scaleX(0); animation: bg-strike 0.4s ease-out forwards; animation-delay: inherit; }
+.bg-scanbar { position: absolute; top: 0; bottom: 0; width: 8%; background: linear-gradient(to right, transparent, oklch(0.87 0.26 143 / 35%), transparent); animation: bg-scan 2.2s linear infinite; pointer-events: none; }
+.bg-code-rain { animation: bg-up 40s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .bg-r,.bg-s,.bg-logo-in { animation-duration: 0.01s; } .bg-scanbar,.bg-code-rain,.bg-pulse,.bg-glitch { animation: none; } }
