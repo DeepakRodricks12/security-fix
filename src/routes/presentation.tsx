@@ -193,7 +193,7 @@ function TitleCard({ final = false }: { final?: boolean }) {
       <R d={8}>
         <p className="font-mono text-sm tracking-[0.3em] text-muted-foreground sm:text-base">AI × CYBERSECURITY</p>
       </R>
-      <div className="flex items-center gap-3 font-pixel text-xs text-primary sm:text-base">
+      <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 font-pixel text-xs text-primary sm:text-base">
         <R d={9}>DETECT</R><Arrow d={10} /><R d={11}>FIX</R><Arrow d={12} /><R d={13} className="bg-pulse px-2 py-1">VERIFY</R>
       </div>
       <R d={14}>
