@@ -161,6 +161,8 @@
 .bg-s { opacity: 0; animation: bg-slide 0.5s ease-out forwards; }
 .bg-logo-in { opacity: 0; animation: bg-glow-in 1.2s ease-out forwards; }
 .bg-pulse { animation: bg-pulse 2.4s ease-in-out infinite; }
+.bg-r.bg-pulse { opacity: 0; animation: bg-reveal 0.5s ease-out forwards, bg-pulse 2.4s ease-in-out infinite; }
+.bg-s.bg-pulse { opacity: 0; animation: bg-slide 0.5s ease-out forwards, bg-pulse 2.4s ease-in-out infinite; }
 .bg-glitch { animation: bg-glitch 4s steps(1) infinite; }
 .bg-strike { position: relative; }
 .bg-strike::after { content: ""; position: absolute; left: -4px; right: -4px; top: 50%; height: 2px; background: var(--critical); transform-origin: left; transform: scaleX(0); animation: bg-strike 0.4s ease-out forwards; animation-delay: inherit; }
