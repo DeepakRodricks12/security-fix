@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
+import logoAsset from "@/assets/breach-guardians-company-logo.png.asset.json";
 
 const nav = [
   { to: "/", label: "Overview" },
@@ -19,11 +20,7 @@ export function Shell({ children }: { children: ReactNode }) {
       <aside className="scanlines sticky top-0 z-20 border-b border-border bg-black/90 backdrop-blur lg:h-screen lg:border-b-0 lg:border-r">
         <div className="flex items-center justify-between px-5 py-4">
           <Link to="/" className="block">
-            <span className="block font-pixel text-[11px] leading-[1.6] text-primary glow-text">
-              BREACH
-              <br />
-              GUARDIANS
-            </span>
+            <img src={logoAsset.url} alt="Breach Guardians" className="h-24 w-auto max-w-[195px] object-contain object-left" />
             <span className="mt-1.5 block font-mono text-[10px] tracking-[0.34em] text-muted-foreground">
               SECURITYFIX
             </span>

@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useCallback, useEffect, useState, type CSSProperties, type ReactNode } from "react";
-import logoAsset from "@/assets/breach-guardians-logo.png.asset.json";
+import logoAsset from "@/assets/breach-guardians-company-logo.png.asset.json";
 
 export const Route = createFileRoute("/presentation")({
   head: () => ({
